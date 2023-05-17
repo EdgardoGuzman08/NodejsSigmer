@@ -1,0 +1,111 @@
+    <section class="content">
+            <div class="container-fluid">
+            <h5 class="mb-2 mt-4">Lista de clientes</h5>
+            <div class="row">
+                <!-- Left col -->
+                <div class="col-md-8">
+                <!-- TABLE: LATEST ORDERS -->
+                <div class="card">
+                    <div class="card-header border-transparent">
+                    <h3 class="card-title">Información general de clientes</h3>
+
+                    <div class="card-tools">
+                        <button type="button" class="btn btn-tool" data-card-widget="collapse">
+                        <i class="fas fa-minus"></i>
+                        </button>
+                        <button type="button" class="btn btn-tool" data-card-widget="remove">
+                        <i class="fas fa-times"></i>
+                        </button>
+                    </div>
+                    </div>
+                    <!-- /.card-header -->
+                    <div class="card-body p-0">
+                    <div class="table-responsive">
+                        <table class="table m-0">
+                        <thead>
+                        <tr>
+                            <th>ID DIRECCION</th>
+                            <th>ID CLIENTE</th>
+                            <th>DIRECCION</th>
+                            <th>CREADA</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {{#each lista}}
+                            <tr>
+                            <td><a href="/direcciones/buscarid?iddireccion={{this.dataValues.iddireccion}}">{{this.dataValues.iddireccion}}</a></td>
+                            <td>{{this.dataValues.idclientess}}</td>
+                            <td>
+                                <div class="sparkbar" data-color="#00a65a" data-height="20">{{this.dataValues.clientedireccion}}</div>
+                            </td>
+                            <td>{{this.dataValues.creada}}</td>
+                            <td>
+                                <div class="btn-group">
+                                <button type="button" class="btn btn-danger eliminar" value="/app/direcciones/eliminar?iddireccion={{this.dataValues.iddireccion}}">
+                                    <i class="fas fa-eraser"></i>
+                                </button>
+                                </div>
+                            </td>
+                            </tr>                           
+                        {{/each}}
+                        </tbody>
+                        </table>
+                    </div>
+                    <!-- /.table-responsive -->
+                    </div>
+                </div>
+                <!-- /.card -->
+                </div>
+                <!-- Fin columna izquierda -->
+                <!-- Comienzo columna derecha -->
+                <div class="col-md-4">
+                <div class="card">
+                    <div class="card-header">
+                    <h3 class="card-title">Creacion de Direccion</h3>
+
+                    <div class="card-tools">
+                        <button type="button" class="btn btn-tool" data-card-widget="collapse">
+                        <i class="fas fa-minus"></i>
+                        </button>
+                        <button type="button" class="btn btn-tool eliminardireccion" data-card-widget="remove">
+                        <i class="fas fa-times"></i>
+                        </button>
+                    </div>
+                    </div>
+                    <!-- /.card-header -->
+                    <div class="card-body">
+                    <div class="row">
+                        <form id="quickForm" action="/app/direcciones/guardar/" method="post">
+                        <div class="card-body">
+                            <div class="form-group">
+                            <label for="inputClienteid">ID del Cliente</label>
+                            <input type="text" name="idclientess" class="form-control" id="inputClienteid" placeholder="Escriba su id del cliente" required>
+                            </div>
+                            <div class="form-group">
+                            <label for="textClienteDireccion">Direccion</label>
+                            <textarea name="clientedireccion" class="form-control" id="textClienteDireccion" placeholder="Escriba el nombre de su direccion" row="3"></textarea>
+                            </div>
+                            <div class="form-group">
+                            <label for="inputCreada">Fecha Creada</label>
+                            <input type="date" name="creada" class="form-control" id="inputCreada" placeholder="Elija su fecha" required>
+                            </div>
+                        </div>
+                        <!-- /.card-body -->
+                        <div class="card-footer">
+                            <button type="button" class="btn btn-primary toastrDefaultSuccess guardardireccion" value="/app/direcciones/guardar">Guardar</button>
+                        </div>
+                        </form>
+                    </div>
+                    <!-- /.row -->
+                    </div>
+                    <!-- /.footer -->
+                </div>
+                <!-- /.card -->
+                </div>
+                <!-- Fin columna derecha -->
+            </div>
+            <!-- Fin primera fila -->
+            </div>
+        </section>
+
+        

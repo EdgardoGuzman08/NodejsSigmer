@@ -1,0 +1,78 @@
+        <!-- Main content -->
+        <section class="content">
+            <div class="container-fluid" style="width: 150%;">
+            <h5 class="mb-2 mt-4">Listado de pedidos</h5>
+            <div class="row">
+                <!-- Left col -->
+                <div class="col-md-8">
+                <!-- TABLE: LATEST ORDERS -->
+                <div class="card">
+                    <div class="card-header border-transparent">
+                    <h3 class="card-title">Información Pedidos</h3>
+
+                    <div class="card-tools">
+                        <button type="button" class="btn btn-tool" data-card-widget="collapse">
+                        <i class="fas fa-minus"></i>
+                        </button>
+                        <button type="button" class="btn btn-tool" data-card-widget="remove">
+                        <i class="fas fa-times"></i>
+                        </button>
+                    </div>
+                    </div>
+                    <!-- /.card-header -->
+                    <div class="card-body p-0">
+                    <div class="table-responsive">
+                        <table class="table m-0">
+                        <thead>
+                        <tr>
+                            <th>CODIGO-PEDIDO</th>
+                            <th>CODIGO-USUARIO-CLIENTE</th>
+                            <th>DISPOSITIVOS</th>
+                            <th>FECHA-HORA</th>
+                            <th>ACTIVO</th>
+                            <th>FECHA-MODIFICACION</th>
+                        </tr>
+                        </thead>
+                        <tbody style="font-size: 20px;">
+                        {{#each lista}}
+                            <tr>
+                            <td><a href="/app/pedidos/bucarid?idpedidos{{this.dataValues.idpedidos}}"> {{this.dataValues.idpedidos}}</a></td> 
+                            <td>
+                                <div class="sparkbar" data-color="#00a65a" data-height="20">{{this.dataValues.usuario_clientes_id}}</div>
+                            </td>
+                            <td>
+                                <div class="sparkbar" data-color="#00a65a" data-height="20">{{this.dataValues.dispositivo}}</div>
+                            </td>
+                            <td>
+                                <div class="sparkbar" data-color="#00a65a" data-height="20">{{this.dataValues.fechahora}}</div>
+                            </td>
+                            <td>
+                                <div class="sparkbar" data-color="#00a65a" data-height="20">{{this.dataValues.activopedido}}</div>
+                            </td>
+                            <td>
+                                <div class="sparkbar" data-color="#00a65a" data-height="20">{{this.dataValues.fechamodificacion}}</div>
+                            </td>
+    
+                            <td>
+                                <div class="btn-group">
+                                <button type="button" class="btn btn-danger borrarpedido" value="/app/pedidos/eliminar?idpedidos={{this.dataValues.idpedidos}}">
+                                    <i class="fas fa-eraser"></i>
+                                </button>
+                                </div>
+                            </td>
+                        </tr>
+                        {{/each}}
+                        </tbody>
+                        </table>
+                    </div>
+                    <!-- /.table-responsive -->
+                    </div>
+                    <!-- /.card-footer -->
+                </div>
+                <!-- /.card -->
+                </div>
+                <!-- Fin columna izquierda -->
+            </div>
+            <!-- Fin primera fila -->
+            </div>
+        </section>

@@ -1,0 +1,63 @@
+        <!-- Main content -->
+        <section class="content">
+            <div class="container-fluid" style="width: 140%">
+            <div class="row">
+                <!-- Left col -->
+                <div class="col-md-8">
+                <!-- TABLE: LATEST ORDERS -->
+                <div class="card">
+                    <div class="card-header border-transparent">
+                    <h3 class="card-title">Información de nuestros menu</h3>
+
+                    <div class="card-tools">
+                        <button type="button" class="btn btn-tool" data-card-widget="collapse">
+                        <i class="fas fa-minus"></i>
+                        </button>
+                        <button type="button" class="btn btn-tool" data-card-widget="remove">
+                        <i class="fas fa-times"></i>
+                        </button>
+                    </div>
+                    </div>
+                    <!-- /.card-header -->
+                    <div class="card-body p-0">
+                    <div class="table-responsive">
+                        <table class="table m-0">
+                        <thead>
+                        <tr>
+                            <th>CODIGO</th>
+                            <th>NOMBRE</th>
+                            <th>PRECIO</th>
+                            <th>IMAGEN</th>
+                        </tr>
+                        </thead>
+                        <tbody style="font-size: 20px;">
+                        
+                        {{#each lista}}
+                            <tr>
+                            <td><a href="/productos/bucarid?id={{this.dataValues.idproducto}}">Combo {{this.dataValues.idproducto}} </a></td> 
+                            <td>{{this.dataValues.nombreproducto}}</td>
+                            <td>
+                                <div class="sparkbar" data-color="#00a65a" data-height="20">{{this.dataValues.precioproducto}}</div>
+                            </td>
+                            <td> <img height="140" width="150"  src="/public/img/{{this.dataValues.foto}}"></td>
+                            <td>
+                            <div class="col-md-6">
+                            <a class="btn btn-success button" href="/app/carrito/listar?action=addToCarritoItem={{this.dataValues.idproducto}}">Agregar a la Carta</a>
+                            </div>
+                            </td>
+                            </tr>
+                        {{/each}}
+                        </tbody>
+                        </table>
+                    </div>
+                    <!-- /.table-responsive -->
+                    </div>
+                    <!-- /.card-footer -->
+                </div>
+                <!-- /.card -->
+                </div>
+                <!-- Fin columna izquierda -->
+            </div>
+            <!-- Fin primera fila -->
+            </div>
+        </section>

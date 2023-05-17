@@ -1,0 +1,129 @@
+    <section class="content">
+            <div class="container-fluid">
+            <h5 class="mb-2 mt-4">Lista de clientes</h5>
+            <div class="row">
+                <!-- Left col -->
+                <div class="col-md-8">
+                <!-- TABLE: LATEST ORDERS -->
+                <div class="card">
+                    <div class="card-header border-transparent">
+                    <h3 class="card-title">Información general de clientes</h3>
+
+                    <div class="card-tools">
+                        <button type="button" class="btn btn-tool" data-card-widget="collapse">
+                        <i class="fas fa-minus"></i>
+                        </button>
+                        <button type="button" class="btn btn-tool" data-card-widget="remove">
+                        <i class="fas fa-times"></i>
+                        </button>
+                    </div>
+                    </div>
+                    <!-- /.card-header -->
+                    <div class="card-body p-0">
+                    <div class="table-responsive">
+                        <table class="table m-0">
+                        <thead>
+                        <tr>
+                            <th>ID CLIENTE</th>
+                            <th>RTN</th>
+                            <th>NOMBRE CLIENTE</th>
+                            <th>DIRECCION</th>
+                            <th>TELEFONO</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {{#each lista}}
+                            <tr>
+                            <td><a href="/clientes/buscarid?idcliente={{this.dataValues.idcliente}}">{{this.dataValues.idcliente}}</a></td>
+                            <td>{{this.dataValues.rtn}}</td>
+                            <td>
+                                <div class="sparkbar" data-color="#00a65a" data-height="20">{{this.dataValues.nombrecliente}}</div>
+                            </td>
+                            <td>{{this.dataValues.direccioncliente}}</td>
+                            <td>{{this.dataValues.telefonocliente}}</td>
+                            <td>
+                                <div class="btn-group">
+                                <button type="button" class="btn btn-danger eliminarcliente" value="/app/clientes/eliminar?idcliente={{this.dataValues.idcliente}}">
+                                    <i class="fas fa-eraser"></i>
+                                </button>
+                                </div>
+                            </td>
+                            </tr>                         
+                        {{/each}}
+                        </tbody>
+                        </table>
+                    </div>
+                    <!-- /.table-responsive -->
+                    </div>
+                </div>
+                <!-- /.card -->
+                </div>
+                <!-- Fin columna izquierda -->
+                <!-- Comienzo columna derecha -->
+                <div class="col-md-4">
+                <div class="card">
+                    <div class="card-header">
+                    <h3 class="card-title">Creacion de Cliente</h3>
+
+                    <div class="card-tools">
+                        <button type="button" class="btn btn-tool" data-card-widget="collapse">
+                        <i class="fas fa-minus"></i>
+                        </button>
+                        <button type="button" class="btn btn-tool eliminar" data-card-widget="remove">
+                        <i class="fas fa-times"></i>
+                        </button>
+                    </div>
+                    </div>
+                    <!-- /.card-header -->
+                    <div class="card-body">
+                    <div class="row">
+                        <form id="quickForm" action="/app/clientes/guardar/" method="post">
+                        <div class="card-body">
+                            <div class="form-group">
+                            <label for="inputRtn">RTN del cliente</label>
+                            <input type="text" name="rtn" class="form-control" id="inputRtn" placeholder="Escriba el nombre del cargo" required>
+                            </div>
+                            <div class="form-group">
+                            <label for="inputNombre">Nombre del cliente</label>
+                            <input type="text" name="nombrecliente" class="form-control" id="inputNombre" placeholder="Escriba el nombre del cargo" required>
+                            </div>
+                            <div class="form-group">
+                            <label for="textDireccion">Direccion Cliente</label>
+                            <textarea name="direccioncliente" class="form-control" id="textDireccion" placeholder="Escriba la descripcion del cargo" row="3"></textarea>
+                            </div>
+                            <div class="form-group">
+                            <label for="inputTelefono">Telefono del cliente</label>
+                            <input type="number" pattern="[0-9]{9}" maxlength="8" name="telefonocliente" class="form-control" id="inputTelefono" placeholder="Escriba el nombre del cargo" required>
+                            </div>
+                            <div class="form-group">
+                            <label for="inputCorreo">Correo del cliente</label>
+                            <input type="text" name="correocliente" class="form-control" id="inputCorreo" placeholder="Escriba el nombre del cargo" required>
+                            </div>
+                            <div action="#" method="post" encytpe="multipart/form-data">
+                            <lab for="imagen">Seleccion su foto de perfil</lab>
+                            <input type="file" name="imagen" class="form-control" id="imagen" placeholder="Seleccione su foto">
+                            </div>
+                            <br>
+                    <div class="form-group">
+                        <label for="nombreimagen">Nombre de la imagen</label>
+                        <input  name="nombreimagen" class="form-control" id="nombreimagen" placeholder="Escriba nombre imagen">
+                    </div>
+                        </div>
+                        <!-- /.card-body -->
+                        <div class="card-footer">
+                            <button type="button" class="btn btn-primary toastrDefaultSuccess guardarcliente" value="/app/clientes/guardar">Guardar</button>
+                        </div>
+                        </form>
+                    </div>
+                    <!-- /.row -->
+                    </div>
+                    <!-- /.footer -->
+                </div>
+                <!-- /.card -->
+                </div>
+                <!-- Fin columna derecha -->
+            </div>
+            <br>
+            <br>
+            </div>
+        </section>

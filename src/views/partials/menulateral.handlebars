@@ -1,0 +1,112 @@
+
+<!-- Main Sidebar Container -->
+<aside class="main-sidebar sidebar-dark-primary elevation-4">
+    <!-- Brand Logo -->
+    <a href="/" class="brand-link">
+      <img src="/public/img/logo_sigres.png" alt="Logo SIGRES" class="brand-image img-circle elevation-3" style="opacity: .8">
+      <span class="brand-text font-weight-light">SIGRES</span>
+    </a>
+
+    <!-- Sidebar -->
+    <div class="sidebar">
+      <!-- Sidebar user panel (optional) -->
+      <div class="user-panel mt-3 pb-3 mb-3 d-flex">
+        <!--<div class="image">
+          <img src="/public/img/Screenshot_20220616-152452_Gallery.jpg" class="img-circle elevation-2" alt="Imagen de usuario">
+        </div>-->
+        <div class="info">
+          <a href="/app/entre" class="d-block">Bienvenido (a) <br> A nuestro restaurante </a>
+        </div>
+      </div>
+      <!-- Sidebar Menu -->
+      <nav class="mt-2">
+        <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+          <!-- Add icons to the links using the .nav-icon class
+              with font-awesome or any other icon font library -->
+          <li class="nav-item menu-open">
+            <a href="/app/" class="nav-link active">
+              <i class="nav-icon fas fa-file-alt"></i>
+              <p>
+                Tablero de control
+                <span class="badge badge-info right">2</span>
+              </p>
+            </a>
+          </li>
+          <li class="nav-item menu-open">
+            <a href="/app/pedidos/listar" class="nav-link">
+              <i class="nav-icon fas fa-solid fa-bag-shopping"></i>
+              <p>
+                Pedidos
+                <span class="badge badge-info right">2</span>
+              </p>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="/app/carrito/listar" class="nav-link">
+            <i class="nav-icon fas fa-solid fa-burger"></i>
+              <p>
+                food Menu
+              </p>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="/app/detalles/listar" class="nav-link">
+            <i class="nav-icon fas fa-solid fa-receipt"></i>
+              <p>
+                Detalle del Pedidos
+              </p>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="/app/mesas/listar" class="nav-link">
+            <i class="nav-icon fas fa-solid fa-utensils"></i>
+              <p>
+                Mesas Disponibles
+              </p>
+            </a>
+          </li>
+          <li class="nav-item">
+          <a href="/" class="nav-link">
+            <i class="nav-icon fas fa-regular fa-id-card"></i>
+            <p>
+              Informacion Cliente
+              <i class="fas fa-angle-left right"></i>
+            </p>
+          </a>
+          <ul class="nav nav-treeview" style="display: none;">
+            <li class="nav-item">
+              <a href="/app/clientes/listar" class="nav-link">
+                <i class="far fa-solid fa-id-badge"></i>
+                <p> Informacion del Cliente</p>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="/app/direcciones/listar" class="nav-link">
+                <i class="far fa-solid fa-map-location"></i>
+                <p> Direcciones del Cliente</p>
+              </a>
+            </li>
+          </ul>
+        </li>
+        <li class="nav-item">
+          <a href="/" class="nav-link">
+            <i class="nav-icon fas fa-address-card"></i>
+            <p>
+              Cargos 
+              <i class="fas fa-angle-left right"></i>
+            </p>
+          </a>
+          <ul class="nav nav-treeview" style="display: none;">
+            <li class="nav-item">
+              <a href="/app/cargos/listar" class="nav-link">
+                <i class="far fa-circle nav-icon"></i>
+                <p>Cargos lista</p>
+              </a>
+            </li>
+        </li>
+        </ul>
+      </nav>
+      <!-- /.sidebar-menu -->
+    </div>
+    <!-- /.sidebar -->
+  </aside>

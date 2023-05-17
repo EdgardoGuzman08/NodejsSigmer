@@ -1,0 +1,71 @@
+
+@import url('https://fonts.googleapis.com/css?family=Ubuntu');
+* {
+padding:0;
+margin:0;
+-webkit-box-sizing: border-box;
+-moz-box-sizing: border-box;
+box-sizing: border-box;
+}
+
+body{
+	background-image: url('../../assets/img/foto2.jpg');
+
+}
+    td{
+    	font-family: 'Ubuntu', sans-serif;
+       
+    	
+    }
+    .usuarios{
+        color:#fff;
+    }
+    .td{
+        color: #fff;
+    }
+.container{
+	background: #fff;
+	border-radius: 4px;
+}
+.reportes{
+    color:#080809;
+}
+
+li{
+    margin-left: 29px;
+    margin-right: 29px;
+  }
+
+ .dropdown-menu{
+ 	background: #CECFD4;
+ 	color:#fff;
+ } 
+
+.thead{
+ 		background: #F35353;
+ 		color:#fff;
+ }
+.mesas{
+    border:5px solid #555353;
+    padding: 10px;
+    border-radius:5px;
+}
+.btn{
+    margin: 5px;
+}
+@media screen and (max-width: 800px) {
+.articulos ,section,footer,body,.container{
+width: 140%;
+
+}
+
+}
+
+
+/*@media screen and (max-width: 800px) {
+body , .container{
+width: 100%;
+
+}
+
+}*/

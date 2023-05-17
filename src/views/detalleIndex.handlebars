@@ -1,0 +1,77 @@
+        <!-- Main content -->
+        <section class="content">
+            <div class="container-fluid" style="width: 150%"> 
+            <br><br><br><br>
+            <div class="row">
+                <!-- Left col -->
+                <div class="col-md-8">
+                <!-- TABLE: LATEST ORDERS -->
+                <div class="card">
+                    <div class="card-header border-transparent">
+                    <h3 class="card-title">Información general de sus pedidos</h3>
+
+                    <div class="card-tools">
+                        <button type="button" class="btn btn-tool" data-card-widget="collapse">
+                        <i class="fas fa-minus"></i>
+                        </button>
+                        <button type="button" class="btn btn-tool" data-card-widget="remove">
+                        <i class="fas fa-times"></i>
+                        </button>
+                    </div>
+                    </div>
+                    <!-- /.card-header -->
+                    <div class="card-body p-0">
+                    <div class="table-responsive">
+                        <table class="table m-0">
+                        <thead>
+                        <tr>
+                            <th>Codigo del detalle de pedido</th>
+                            <th>ID pedido</th>
+                            <th>ID producto</th>
+                            <th>Cantidad</th>
+                            <th>Anulado</th>
+                            <th>Recibido</th>
+                            <th>Entregado</th>
+                            <th>Facturado</th>
+                            <th>Nota</th>
+                        </tr>
+                        </thead>
+                        <tbody style="font-size: 22px;">
+                        {{#each lista}}
+                        <tr>
+                            <td><a href="/detalles/buscarid?iddetalle={{this.dataValues.iddetalle}}">{{this.dataValues.iddetalle}}</a></td>
+                            <td>{{this.dataValues.pedidosid}}</td>
+                            <td>
+                            <div class="sparkbar" data-color="#f39c12" data-height="20">{{this.dataValues.productosid}}</div>
+                            </td>
+                            <td>{{this.dataValues.cantidad}}</td>
+                            <td><span style="font-size: 16px;" class="badge badge-danger">{{this.dataValues.anulado}}</span></td>
+                            <td><span style="font-size: 16px;" class="badge badge-success">{{this.dataValues.recibido}}</span></td>
+                            <td><span style="font-size: 16px;" class="badge badge-info">{{this.dataValues.entregado}}</span></td>
+                            <td><span style="font-size: 16px;" class="badge badge-warning">{{this.dataValues.facturado}}</span></td>
+                            <td><span style="font-size: 16px;">{{this.dataValues.nota}}</span></td>
+                            <td>
+                                <div class="btn-group">
+                                <button type="button" class="btn btn-danger eliminar" value="/app/detalles/eliminar?iddetalle={{this.dataValues.iddetalle}}">
+                                    <i class="fas fa-eraser"></i>
+                                </button>
+                                </div>
+                            </td>
+                        </tr>
+                        {{/each}}
+                        </tbody>
+                        </table>
+                    </div>
+                    <!-- /.table-responsive -->
+                    </div>
+                    <!-- /.card-footer -->
+                </div>
+                <!-- /.card -->
+                </div>
+                <!-- Fin columna izquierda -->
+
+                <!-- Fin columna derecha -->
+            </div>
+            <!-- Fin primera fila -->
+            </div>
+        </section>

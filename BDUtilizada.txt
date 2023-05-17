@@ -1,0 +1,247 @@
+-- MySQL Workbench Forward Engineering
+
+SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0;
+SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0;
+SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION';
+
+-- -----------------------------------------------------
+-- Schema sifcon
+-- -----------------------------------------------------
+
+-- -----------------------------------------------------
+-- Schema sifcon
+-- -----------------------------------------------------
+CREATE SCHEMA IF NOT EXISTS `sifcon` DEFAULT CHARACTER SET latin1 ;
+USE `sifcon` ;
+
+-- -----------------------------------------------------
+-- Table `sifcon`.`app_pedidos`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `sifcon`.`app_pedidos` (
+  `id` INT NOT NULL AUTO_INCREMENT,
+  `usuario_clientes_id` INT NOT NULL,
+  `fechahora` DATETIME NULL DEFAULT CURRENT_TIMESTAMP,
+  `dispositivo` VARCHAR(250) NULL DEFAULT NULL,
+  `activo` TINYINT(1) NULL DEFAULT '1',
+  `modalidad` ENUM('ME', 'DO', 'LL') NOT NULL,
+  `estado` ENUM('AAA', 'NNN', 'SNN', 'SSN', 'NNS', 'SNS', 'SSS', 'NSS', 'NSN') NULL DEFAULT NULL,
+  `usuarios_idregistro` INT NULL DEFAULT NULL,
+  `fechamodificacion` DATETIME NULL DEFAULT CURRENT_TIMESTAMP,
+  `usuariomodificacion` INT NULL DEFAULT NULL,
+  `estacionmodificacion` INT NULL DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  INDEX `fk_app_pedidos_usuario_clientes1_idx` (`usuario_clientes_id` ASC) VISIBLE,
+  INDEX `fk_app_pedidos_usuarios1_idx` (`usuarios_idregistro` ASC) VISIBLE,
+  CONSTRAINT `fk_app_pedidos_usuario_clientes1`
+    FOREIGN KEY (`usuario_clientes_id`)
+    REFERENCES `sifcon`.`usuarioclientes` (`id`),
+  CONSTRAINT `fk_app_pedidos_usuarios1`
+    FOREIGN KEY (`usuarios_idregistro`)
+    REFERENCES `sifcon`.`usuarios` (`idregistro`))
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = latin1;
+
+-- -----------------------------------------------------
+-- Table `sifcon`.`productos`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `sifcon`.`productos` (
+  `Codigo` VARCHAR(15) NOT NULL,
+  `Nombre` VARCHAR(40) NOT NULL,
+  `IMAGEN` LONGBLOB,
+  `Precio` double,
+  PRIMARY KEY (`Codigo`))
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = latin1;
+
+-- -----------------------------------------------------
+-- Table `sifcon`.`app_detalle_pedidos`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `sifcon`.`app_detalle_pedidos` (
+  `id` INT NOT NULL AUTO_INCREMENT,
+  `app_pedidos_id` INT NOT NULL,
+  `productos_Codigo` VARCHAR(15) NOT NULL,
+  `cantidad` DOUBLE NOT NULL,
+  `anulado` TINYINT(1) NULL DEFAULT '0',
+  `recibido` TINYINT(1) NULL DEFAULT '0',
+  `entregado` TINYINT(1) NULL DEFAULT '0',
+  `facturado` TINYINT(1) NULL DEFAULT '0',
+  `nota` VARCHAR(250) NULL DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  INDEX `fk_app_detalle_pedidos_app_pedidos1_idx` (`app_pedidos_id` ASC) VISIBLE,
+  INDEX `fk_app_detalle_pedidos_productos1_idx` (`productos_Codigo` ASC) VISIBLE,
+  CONSTRAINT `fk_app_detalle_pedidos_app_pedidos1`
+    FOREIGN KEY (`app_pedidos_id`)
+    REFERENCES `sifcon`.`app_pedidos` (`id`),
+  CONSTRAINT `fk_app_detalle_pedidos_productos1`
+    FOREIGN KEY (`productos_Codigo`)
+    REFERENCES `sifcon`.`productos` (`Codigo`))
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = latin1;
+
+
+-- -----------------------------------------------------
+-- Table `sifcon`.`app_anular_pedidos`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `sifcon`.`app_anular_pedidos` (
+  `app_detalle_pedidos_id` INT NOT NULL,
+  `usuarios_idregistro` INT NOT NULL,
+  `fechahora` DATETIME NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`app_detalle_pedidos_id`),
+  INDEX `fk_table1_usuarios1_idx` (`usuarios_idregistro` ASC) VISIBLE,
+  INDEX `fk_table1_app_detalle_pedidos1_idx` (`app_detalle_pedidos_id` ASC) VISIBLE,
+  CONSTRAINT `fk_table1_app_detalle_pedidos1`
+    FOREIGN KEY (`app_detalle_pedidos_id`)
+    REFERENCES `sifcon`.`app_detalle_pedidos` (`id`),
+  CONSTRAINT `fk_table1_usuarios1`
+    FOREIGN KEY (`usuarios_idregistro`)
+    REFERENCES `sifcon`.`usuarios` (`idregistro`))
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = latin1;
+
+
+-- -----------------------------------------------------
+-- Table `sifcon`.`app_entrega_pedidos`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `sifcon`.`app_entrega_pedidos` (
+  `app_detalle_pedidos_id` INT NOT NULL,
+  `usuarios_idregistro` INT NOT NULL,
+  `fechahora` DATETIME NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`app_detalle_pedidos_id`),
+  INDEX `fk_app_entrega_pedidos_usuarios1_idx` (`usuarios_idregistro` ASC) VISIBLE,
+  INDEX `fk_app_entrega_pedidos_app_detalle_pedidos1_idx` (`app_detalle_pedidos_id` ASC) VISIBLE,
+  CONSTRAINT `fk_app_entrega_pedidos_app_detalle_pedidos1`
+    FOREIGN KEY (`app_detalle_pedidos_id`)
+    REFERENCES `sifcon`.`app_detalle_pedidos` (`id`),
+  CONSTRAINT `fk_app_entrega_pedidos_usuarios1`
+    FOREIGN KEY (`usuarios_idregistro`)
+    REFERENCES `sifcon`.`usuarios` (`idregistro`))
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = latin1;
+
+
+-- -----------------------------------------------------
+-- Table `sifcon`.`app_pedido_domicilio`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `sifcon`.`app_pedido_domicilio` (
+  `app_pedidos_id` INT NOT NULL,
+  `clientes_direcciones_id` INT NOT NULL,
+  PRIMARY KEY (`app_pedidos_id`),
+  INDEX `fk_app_pedido_domicilio_app_pedidos1_idx` (`app_pedidos_id` ASC) VISIBLE,
+  INDEX `fk_app_pedido_domicilio_clientes_direcciones1_idx` (`clientes_direcciones_id` ASC) VISIBLE,
+  CONSTRAINT `fk_app_pedido_domicilio_app_pedidos1`
+    FOREIGN KEY (`app_pedidos_id`)
+    REFERENCES `sifcon`.`app_pedidos` (`id`),
+  CONSTRAINT `fk_app_pedido_domicilio_clientes_direcciones1`
+    FOREIGN KEY (`clientes_direcciones_id`)
+    REFERENCES `sifcon`.`clientes_direcciones` (`id`))
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = latin1;
+
+
+-- -----------------------------------------------------
+-- Table `sifcon`.`app_pedidos_mesas`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `sifcon`.`app_pedidos_mesas` (
+  `id` INT NOT NULL AUTO_INCREMENT,
+  `app_pedidos_id` INT NOT NULL,
+  `mesas_x_area_idregistro` INT NOT NULL,
+  PRIMARY KEY (`id`),
+  INDEX `fk_app_pedidos_mesas_app_pedidos1_idx` (`app_pedidos_id` ASC) VISIBLE,
+  INDEX `fk_app_pedidos_mesas_mesas_x_area1_idx` (`mesas_x_area_idregistro` ASC) VISIBLE,
+  CONSTRAINT `fk_app_pedidos_mesas_app_pedidos1`
+    FOREIGN KEY (`app_pedidos_id`)
+    REFERENCES `sifcon`.`app_pedidos` (`id`),
+  CONSTRAINT `fk_app_pedidos_mesas_mesas_x_area1`
+    FOREIGN KEY (`mesas_x_area_idregistro`)
+    REFERENCES `sifcon`.`mesas_x_area` (`idregistro`))
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = latin1;
+
+
+-- -----------------------------------------------------
+-- Table `sifcon`.`app_pedidos_x_ventas`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `sifcon`.`app_pedidos_x_ventas` (
+  `ventas_idregistro` INT NOT NULL,
+  `app_pedidos_id` INT NOT NULL,
+  PRIMARY KEY (`ventas_idregistro`, `app_pedidos_id`),
+  INDEX `fk_app_pedidos_x_ventas_ventas1_idx` (`ventas_idregistro` ASC) VISIBLE,
+  INDEX `fk_app_pedidos_x_ventas_app_pedidos1_idx` (`app_pedidos_id` ASC) VISIBLE,
+  CONSTRAINT `fk_app_pedidos_x_ventas_app_pedidos1`
+    FOREIGN KEY (`app_pedidos_id`)
+    REFERENCES `sifcon`.`app_pedidos` (`id`),
+  CONSTRAINT `fk_app_pedidos_x_ventas_ventas1`
+    FOREIGN KEY (`ventas_idregistro`)
+    REFERENCES `sifcon`.`ventas` (`idregistro`))
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = latin1;
+
+-- -----------------------------------------------------
+-- Table `sifcon`.`clientes`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `sifcon`.`clientes` (
+  `idregistro` INT NOT NULL AUTO_INCREMENT,
+  `RTN` VARCHAR(16) CHARACTER SET 'utf8mb3' NULL DEFAULT '00000000000000',
+  `Nombre` VARCHAR(30) CHARACTER SET 'utf8mb3' NOT NULL,
+  `Direccion` TEXT CHARACTER SET 'utf8mb3' NULL DEFAULT NULL,
+  `Telefono` VARCHAR(30) CHARACTER SET 'utf8mb3' NULL DEFAULT NULL,
+  `Correo` VARCHAR(250) CHARACTER SET 'utf8mb3' NULL DEFAULT NULL,
+  `Imagen` LONGBLOB NULL DEFAULT NULL,
+  `nombreImagen` VARCHAR(250) NULL DEFAULT NULL,
+  PRIMARY KEY (`idregistro`),
+  INDEX `clientes_rtn_idx` (`RTN` ASC) VISIBLE,
+  INDEX `clientes_nombre_idx` (`Nombre` ASC) VISIBLE,
+  INDEX `clientes_telefono_idx` (`Telefono` ASC) VISIBLE)
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = latin1;
+
+-- -----------------------------------------------------
+-- Table `sifcon`.`clientes_dirreciones`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `sifcon`.`clientes_direcciones` (
+  `id` INT NOT NULL AUTO_INCREMENT,
+  `idcliente` INT NOT NULL,
+  `direccion` TEXT NOT NULL,
+  `creada` DATETIME NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`),
+  INDEX `FK_clientes_direcciones_idcliente_idx` (`idcliente` ASC) VISIBLE,
+  CONSTRAINT `FK_clientes_direcciones_idcliente`
+    FOREIGN KEY (`idcliente`)
+    REFERENCES `sifcon`.`clientes` (`idregistro`))
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = latin1;
+
+-- -----------------------------------------------------
+-- Table `sifcon`.`usuarioclientes`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `sifcon`.`usuarioclientes` (
+  `id` INT NOT NULL AUTO_INCREMENT,
+  `idcliente` INT NULL DEFAULT NULL,
+  `correo` VARCHAR(250) NOT NULL,
+  `gmail` VARCHAR(45) NULL DEFAULT NULL,
+  `facebook` VARCHAR(45) NULL DEFAULT NULL,
+  `contrasena` VARCHAR(250) NOT NULL,
+  `logueado` TINYINT(1) NULL DEFAULT '0',
+  `activo` TINYINT(1) NULL DEFAULT '1',
+  `pin` INT NULL DEFAULT NULL,
+  `expiration` DATETIME NULL DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  INDEX `fk_usuario_clientes_clientes1_idx` (`idcliente` ASC) VISIBLE,
+  CONSTRAINT `fk_usuario_clientes_clientes1`
+    FOREIGN KEY (`idcliente`)
+    REFERENCES `sifcon`.`clientes` (`idregistro`))
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = latin1;
+
+SET SQL_MODE=@OLD_SQL_MODE;
+SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
+SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
+
+CREATE TABLE ventas (
+    idregistro INT PRIMARY KEY AUTO_INCREMENT
+);
+CREATE TABLE mesas_x_area (
+    idregistro INT PRIMARY KEY AUTO_INCREMENT
+);
+ALTER TABLE app_pedidos_mesas add COLUMN libre bit default 1
+

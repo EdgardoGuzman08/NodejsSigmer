@@ -1,0 +1,67 @@
+<div class="wrapper">
+        <!-- Main content -->
+        <section class="content">
+        <div class="container-fluid" style="width: 80%">
+            <div class="row">
+            <!-- left column -->
+            <div class="col-md-12">
+                <!-- jquery validation -->
+                <div class="card card-primary">
+                <div class="card-header">
+                    <h3 class="card-title">Datos generales <small>del Cliente</small></h3>
+                </div>
+                <!-- /.card-header -->
+                <!-- form start -->
+                <form id="quickForm" action="" method="post">
+                    <div class="card-body">
+                    <div class="form-group">
+                    {{#each lista}}
+                        <label for="inputNombre"> <img height="180" width="200"  src="/public/img/{{this.dataValues.nombreimagen}}"></label>
+                    </div>
+                    <br>
+                    <div class="form-group">
+                        <label for="inputNombre">ID DEL CLIENTE: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{this.dataValues.idcliente}}</label>
+                    </div>
+                    <br>
+                    <div class="form-group">
+                        <label for="inputNombre">RTN DEL CLIENTE: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; {{this.dataValues.rtn}}</label>
+                    </div>
+                    <br>
+                    <div class="form-group">
+                        <label for="inputNombre">NOMBRE DEL CLIENTE: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; {{this.dataValues.nombrecliente}}</label>
+                    </div>
+                    <br>
+                    <div class="form-group">
+                        <label for="inputNombre">DIRECCION DEL CLIENTE: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; {{this.dataValues.direccioncliente}}</label>
+                    </div>
+                    <br>
+                    <div class="form-group">
+                        <label for="inputNombre">TELEFONO DEL CLIENTE: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; {{this.dataValues.telefonocliente}}</label>
+                    </div>
+                    <br>
+                    <div class="form-group">
+                        <label for="inputNombre">CORREO DEL CLIENTE: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; {{this.dataValues.correocliente}}</label>
+                    </div>
+                    <br>
+                    {{/each}}     
+                </form>
+                </div>
+                <!-- /.card -->
+                </div>
+            <!--/.col (left) -->
+            <!-- right column -->
+            <div class="col-md-6">
+
+            </div>
+            <!--/.col (right) -->
+            </div>
+            <!-- /.row -->
+        </div><!-- /.container-fluid -->
+        </section>
+        <!-- /.content -->
+    <?php include 'vistas/plantilla/pie.php'; ?>
+    <!-- Aqui agregar script adicionales -->
+    <!-- jquery-validation -->
+    <script src="/public/plugins/jquery-validation/jquery.validate.min.js"></script>
+    <script src="/public/plugins/jquery-validation/additional-methods.min.js"></script>
+    <?php include 'vistas/plantilla/script.php'; ?>
